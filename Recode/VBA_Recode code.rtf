@@ -1,0 +1,243 @@
+{\rtf1\ansi\ansicpg1252\cocoartf2761
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fswiss\fcharset0 Helvetica;}
+{\colortbl;\red255\green255\blue255;}
+{\*\expandedcolortbl;;}
+\paperw11900\paperh16840\margl1440\margr1440\vieww11520\viewh8400\viewkind0
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+
+\f0\fs24 \cf0 Sub Recode_HP()\
+Dim i As Integer\
+Dim j As Integer\
+Dim q As Integer\
+Dim k As Integer\
+\
+Range("C16:K10000").ClearContents\
+\
+q = 16\
+For j = 6 To 11\
+k = Cells(j, 16384)\
+If k <> 0 Then\
+Cells(16, 2 * j - 9) = "RECODE"\
+Cells(16 + 2 + k * 2, 2 * j - 9) = "EXECUTE."\
+'Scale 5\
+If Cells(j, 2) = 5 Then\
+If j = 6 Then\
+Cells(16 + 1 + k, 2 * j - 9) = "(1 thru 2 = 0) (3=1) (4 thru 5 = 0) INTO"\
+End If\
+If j = 7 Then\
+Cells(16 + 1 + k, 2 * j - 9) = "(1 thru 3 = 0) (4 thru 5 = 1) INTO"\
+End If\
+If j = 8 Then\
+Cells(16 + 1 + k, 2 * j - 9) = "(1 thru 2 = 0) (3 thru 5 = 1) INTO"\
+End If\
+If j = 9 Then\
+Cells(16 + 1 + k, 2 * j - 9) = "(1 thru 2 = 1) (3 thru 5 = 0) INTO"\
+End If\
+If j = 10 Then\
+Cells(16 + 1 + k, 2 * j - 9) = "(1 thru 4 = 0) (5 = 1) INTO"\
+End If\
+If j = 11 Then\
+Cells(16 + 1 + k, 2 * j - 9) = "(1 = 1)(2 = 2)(3 = 3)(4 = 2)(5 = 1) INTO"\
+End If\
+End If\
+\
+'Scale 7\
+If Cells(j, 2) = 7 Then\
+If j = 6 Then\
+Cells(16 + 1 + k, 2 * j - 9) = "(1 thru 3 = 0) (4=1) (5 thru 7 = 0) INTO"\
+End If\
+If j = 7 Then\
+Cells(16 + 1 + k, 2 * j - 9) = "(1 thru 5 = 0) (6 thru 7 = 1) INTO"\
+End If\
+If j = 8 Then\
+Cells(16 + 1 + k, 2 * j - 9) = "(1 thru 4 = 0) (5 thru 7 = 1) INTO"\
+End If\
+If j = 9 Then\
+Cells(16 + 1 + k, 2 * j - 9) = "(1 thru 2 = 1) (3 thru 7 = 0) INTO"\
+End If\
+If j = 10 Then\
+Cells(16 + 1 + k, 2 * j - 9) = "(1 thru 6 = 0) (7 = 1) INTO"\
+End If\
+If j = 11 Then\
+Cells(16 + 1 + k, 2 * j - 9) = "(1 = 1)(2 = 2)(3 = 3)(4 = 4)(5 = 3)(6 = 2)(7 = 1) INTO"\
+End If\
+End If\
+\
+\
+'Scale 9\
+If Cells(j, 2) = 9 Then\
+If j = 6 Then\
+Cells(16 + 1 + k, 2 * j - 9) = "(1 thru 4 = 0) (5=1) (6 thru 9 = 0) INTO"\
+End If\
+If j = 7 Then\
+Cells(16 + 1 + k, 2 * j - 9) = "(1 thru 7 = 0) (8 thru 9 = 1) INTO"\
+End If\
+If j = 8 Then\
+Cells(16 + 1 + k, 2 * j - 9) = "(1 thru 6 = 0) (7 thru 9 = 1) INTO"\
+End If\
+If j = 9 Then\
+Cells(16 + 1 + k, 2 * j - 9) = "(1 thru 2 = 1) (3 thru 9 = 0) INTO"\
+End If\
+If j = 10 Then\
+Cells(16 + 1 + k, 2 * j - 9) = "(1 thru 8 = 0) (9 = 1) INTO"\
+End If\
+If j = 11 Then\
+Cells(16 + 1 + k, 2 * j - 9) = "(1 = 1)(2 = 2)(3 = 3)(4 = 4)(5 = 5)(6 = 4)(7 = 3)(8 = 2)(9 = 1) INTO"\
+End If\
+End If\
+\
+\
+\
+End If\
+\
+q = 17\
+For i = 3 To k + 2\
+If Cells(j, i) <> "" Then\
+Cells(q, 2 * j - 9) = Cells(j, i)\
+If i <> k + 2 Then\
+Cells(k + q + 1, 2 * j - 9) = Cells(j, i) & "_" & Cells(j, 1)\
+End If\
+\
+If i = k + 2 Then\
+Cells(k + q + 1, 2 * j - 9) = Cells(j, i) & "_" & Cells(j, 1) & "."\
+End If\
+\
+q = q + 1\
+End If\
+Next\
+\
+Next\
+\
+\
+End Sub\
+\
+\
+Sub Recode_MS()\
+\
+Sheets("RECODE").Select\
+so_sp = Sheets("RECODE").Cells(2, Columns.Count).End(xlToLeft).Column - 1\
+dau = Sheets("RECODE").Cells(3, 2)\
+\
+If so_sp = 0 Then\
+    so_sp = 1\
+Else\
+End If\
+\
+\
+'Cho san pham chay\
+For pro = 1 To so_sp\
+    sp = Sheets("RECODE").Cells(2, pro + 1)\
+    \
+    If sp = "" Then\
+    ghep = ""\
+    Else\
+    ghep = dau & sp\
+    End If\
+    \
+'Cho loai chay\
+For loai = 5 To 12\
+    \
+    so_cau = Sheets("RECODE").Cells(loai, Columns.Count).End(xlToLeft).Column - 3\
+    topbox = Sheets("RECODE").Cells(loai, 2)\
+    thangdo = Sheets("RECODE").Cells(loai, 3)\
+    \
+    If so_cau >= 1 Then\
+    ReDim result(so_cau * 2 + 5, 0)\
+    \
+    If loai = 7 Or loai >= 10 Then\
+    \
+    Dim mang2\
+    mang2 = Split(topbox, "-")\
+    If UBound(mang2) = 0 Then\
+        thapI = mang2(0)\
+        caoI = mang2(0)\
+    Else\
+        thapI = mang2(0)\
+        caoI = mang2(1)\
+    End If\
+    \
+    topbox = Replace(topbox, "-", " thru ")\
+    phantu = Len(topbox) - Len(Replace(topbox, ";", "")) + 1\
+   \
+    Dim mang\
+    mang = Split(topbox, ";")\
+        dong = 0\
+        \
+        Do\
+          mang(dong) = "(" & mang(dong) & "= " & dong + 1 & ")"\
+            dong = dong + 1\
+        Loop While dong < phantu\
+        \
+        ghep_mang = Join(mang, "")\
+        \
+    Else\
+    End If\
+    \
+        result(0, 0) = "***" & Sheets("RECODE").Cells(loai, 1) & " " & topbox\
+        result(2, 0) = "RECODE"\
+        result(so_cau * 2 + 4, 0) = "EXECUTE."\
+        \
+        \
+        'Cho cau chay\
+        For cau = 1 To so_cau\
+            Label = Sheets("RECODE").Cells(loai, cau + 3)\
+            result(cau + 2, 0) = Label & ghep\
+            If loai = 5 Then\
+                tam = "T" & topbox & "B"\
+                result(so_cau + 3, 0) = "(1 thru " & thangdo - topbox & " = 0) (" & thangdo - topbox + 1 & " thru " & thangdo & " = 1) INTO"\
+\
+            ElseIf loai = 6 Then\
+                tam = "B" & topbox & "B"\
+                result(so_cau + 3, 0) = "(1 thru " & topbox & " = 1) (" & topbox + 1 & " thru " & thangdo & " = 0) INTO"\
+                \
+            ElseIf loai = 7 Then\
+                tam = Cells(loai, 1)\
+                result(so_cau + 3, 0) = ghep_mang & " INTO"\
+\
+            ElseIf loai = 8 Then\
+                tam = Cells(loai, 1)\
+                result(so_cau + 3, 0) = "(1 thru 2 = 1)(3 = 2)(4 thru 5 = 3) INTO"\
+             ElseIf loai = 9 Then\
+                tam = Cells(loai, 1)\
+                result(so_cau + 3, 0) = "(1 = 1)(2 = 2)(3 = 3)(4 = 2)(5 = 1) INTO"\
+                \
+            ElseIf loai = 10 Then\
+                tam = Cells(loai, 1)\
+                result(so_cau + 3, 0) = "(1 thru " & thapI - 1 & "=0)" & ghep_mang & " INTO"\
+            ElseIf loai = 11 Then\
+                tam = Cells(loai, 1)\
+                result(so_cau + 3, 0) = "(1 thru " & thapI - 1 & "=0)" & ghep_mang & "(" & caoI + 1 & " thru " & thangdo & "=0) INTO"\
+            ElseIf loai = 12 Then\
+                tam = Cells(loai, 1)\
+                result(so_cau + 3, 0) = ghep_mang & "(" & caoI + 1 & " thru " & thangdo & "=0) INTO"\
+            Else\
+            \
+            End If\
+            \
+            If cau < so_cau Then\
+             result(cau + 2 + so_cau + 1, 0) = Label & "_" & tam & ghep\
+            Else\
+             result(cau + 2 + so_cau + 1, 0) = Label & "_" & tam & ghep & "."\
+            End If\
+        Next cau\
+\
+dong_cuoi = Sheets("RECODE").Range("A" & Rows.Count).End(xlUp).Row + 2\
+Sheets("RECODE").Range("A" & dong_cuoi).Resize(so_cau * 2 + 6, 1) = result\
+    \
+    Else\
+    End If\
+    \
+Next loai\
+\
+Next pro\
+\
+End Sub\
+\
+Sub xoa_recode()\
+\
+dong_cuoi = Sheets("RECODE").Range("A" & Rows.Count).End(xlUp).Row + 2\
+Range("A14:A" & dong_cuoi).Delete\
+\
+End Sub\
+\
+}
